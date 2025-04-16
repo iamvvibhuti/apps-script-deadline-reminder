@@ -4,7 +4,7 @@
  */
 
 // TODO: Replace with the actual ID of your Google Spreadsheet
-const SPREADSHEET_ID = "1VaQcjLi8ug2hFQZ15YZXTyH7BQp2w3h_MgELCkQTNvw"; // Using the ID from your previous code
+const SPREADSHEET_ID = "Google Sheet ID"; // Using the ID from your previous code
 
 // TODO: Replace with the exact name of the sheet tab containing the data
 const SHEET_NAME = "Sheet1"; // Adjust if your sheet tab has a different name
