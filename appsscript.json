@@ -4,7 +4,7 @@
  */
 
 // TODO: Replace with the actual ID of your Google Spreadsheet
-const SPREADSHEET_ID = "1VaQcjLi8ug2hFQZ15YZXTyH7BQp2w3h_MgELCkQTNvw";
+const SPREADSHEET_ID = "1VaQcjLi8ug2hFQZ15YZXTyH7BQp2w3h_MgELCkQTNvw"; // Using the ID from your previous code
 
 // TODO: Replace with the exact name of the sheet tab containing the data
 const SHEET_NAME = "Sheet1"; // Adjust if your sheet tab has a different name
@@ -102,7 +102,7 @@ function sendDeadlineRemindersUpdated() { // Renamed function slightly for clari
 
         const emailSubject = `Reminder: ${subjectLine || task} - Due in ${REMINDER_DAYS_BEFORE} days (${formattedDueDate})`;
         // Pass new Name and Manager Name variables to the email builder
-        const emailBody = buildHtmlEmailBodyUpdated(subjectLine, task, targetDate, name, managerName);
+        const emailBody = buildHtmlEmailBodyUpdated_NoColor(subjectLine, task, targetDate, name, managerName); // Call the no-color version
 
         const mailOptions = {
           to: recipient.toString().trim(),
@@ -133,6 +133,7 @@ function sendDeadlineRemindersUpdated() { // Renamed function slightly for clari
 
 /**
  * UPDATED Helper function to build the HTML email body, including Name and Manager Name.
+ * COLORS REMOVED per request.
  * @param {string} subjectLine The subject line from the sheet.
  * @param {string} task The task description from the sheet.
  * @param {Date} targetDate The target date object.
@@ -140,10 +141,10 @@ function sendDeadlineRemindersUpdated() { // Renamed function slightly for clari
  * @param {string} managerName The manager name from the sheet.
  * @return {string} HTML formatted email body.
  */
-function buildHtmlEmailBodyUpdated(subjectLine, task, targetDate, name, managerName) {
+function buildHtmlEmailBodyUpdated_NoColor(subjectLine, task, targetDate, name, managerName) { // Renamed function slightly
   const formattedDueDate = Utilities.formatDate(targetDate, Session.getScriptTimeZone(), "MMMM dd, yyyy"); // e.g., April 16, 2025
 
-  // Updated HTML email body template
+  // Updated HTML email body template - COLOR STYLES REMOVED
   let html = `
     <html>
       <body style="font-family: Arial, sans-serif; line-height: 1.6;">
@@ -151,31 +152,30 @@ function buildHtmlEmailBodyUpdated(subjectLine, task, targetDate, name, managerN
         <p>This is an automated reminder for the following task:</p>
         <table style="border-collapse: collapse; width: 100%; border: 1px solid #ddd; margin-bottom: 15px;">
           <tr>
-            <td style="padding: 8px; border: 1px solid #ddd; background-color: #f2f2f2; width: 120px;"><strong>Subject:</strong></td>
+            <td style="padding: 8px; border: 1px solid #ddd; width: 120px;"><strong>Subject:</strong></td>
             <td style="padding: 8px; border: 1px solid #ddd;">${subjectLine || "(No Subject Provided)"}</td>
           </tr>
           <tr>
-            <td style="padding: 8px; border: 1px solid #ddd; background-color: #f2f2f2;"><strong>Assigned To:</strong></td>
+            <td style="padding: 8px; border: 1px solid #ddd;"><strong>Assigned To:</strong></td>
             <td style="padding: 8px; border: 1px solid #ddd;">${name || "(No Name Provided)"}</td>
           </tr>
           <tr>
-            <td style="padding: 8px; border: 1px solid #ddd; background-color: #f2f2f2;"><strong>Manager:</strong></td>
+            <td style="padding: 8px; border: 1px solid #ddd;"><strong>Manager:</strong></td>
             <td style="padding: 8px; border: 1px solid #ddd;">${managerName || "(No Manager Provided)"}</td>
           </tr>
           <tr>
-            <td style="padding: 8px; border: 1px solid #ddd; background-color: #f2f2f2;"><strong>Task Details:</strong></td>
+            <td style="padding: 8px; border: 1px solid #ddd;"><strong>Task Details:</strong></td>
             <td style="padding: 8px; border: 1px solid #ddd;">${task ? task.replace(/\n/g, '<br>') : "(No Task Details Provided)"}</td>
           </tr>
           <tr>
-            <td style="padding: 8px; border: 1px solid #ddd; background-color: #f2f2f2;"><strong>Target Deadline:</strong></td>
-            <td style="padding: 8px; border: 1px solid #ddd;"><strong><span style="color: #D32F2F;">${formattedDueDate}</span></strong> (Due in ${REMINDER_DAYS_BEFORE} days)</td>
+            <td style="padding: 8px; border: 1px solid #ddd;"><strong>Target Deadline:</strong></td>
+            <td style="padding: 8px; border: 1px solid #ddd;"><strong><span>${formattedDueDate}</span></strong> (Due in ${REMINDER_DAYS_BEFORE} days)</td>
           </tr>
         </table>
         <p>Please ensure this task is prioritized and completed before the target date.</p>
         <br>
-        <p style="color: #888; font-size: 0.9em;"><em>This is a test email sent by Vivek Vibhuti. Please do not reply directly.</em></p>
+        <p style="font-size: 0.9em;"><em>This is a test email sent by Vivek Vibhuti. Please do not reply directly.</em></p>
       </body>
     </html>`;
   return html;
 }
-
