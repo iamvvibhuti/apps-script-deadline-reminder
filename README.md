@@ -10,7 +10,7 @@ Includes task summary, assigned personnel, manager, and due date within the emai
 Sends emails to defined users and CCs.
 Uses HTML formatting for emails.
 
-**Integration Instructions**
+**Configuration Instructions**
 
 1.	Build Google Sheet: Start by creating a Google sheet that will have task data, making sure it contains the columns detailed below. The sheet ID that can be extracted from its URL (the long string lying between /d/ and /edit).
 2.	Build Apps Script: Either go to script.google.com or go to the sheet and click on Extensions > Apps Script > Create a new Apps Script project.
@@ -37,7 +37,7 @@ Pick time of day: For when Daily timer event will occur
 Error notification settings: Determine how you want to be notified when the script fails and possibly spam’d you.
 7.	Click “Save”. Depending on user settings you may need to approve again.
 
-**Structure of Google Sheet**
+**How Set up Google Sheet**
 
 The script anticipates that the Google Sheet denoted by SHEET_NAME will at least include the following columns (the order matters for the default _COL_INDEX values):
 1.	”Column A:” Subject (A part of Email subject line)
